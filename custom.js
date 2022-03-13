@@ -73,5 +73,5 @@ function sendWhatsapp() {
     text += "Tuğla Adedi: " + this.totalBrick + " adet\n";
     
     var whatsappLink = "https://wa.me/905061324455?text=" + encodeURI(text);
-    window.location.href = whatsappLink;
+    window.open(whatsappLink);
 }
