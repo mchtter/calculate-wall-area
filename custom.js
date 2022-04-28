@@ -6,11 +6,10 @@ var fieldWidth,
     doorHeight, 
     windowWidth, 
     windowHeight, 
-    doorsNumber, 
+    doorNumber, 
     windowNumber, 
     totalWallArea, 
-    totalCeilingArea, 
-    totalBrick;
+    totalCeilingArea;
 
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -26,34 +25,25 @@ function calculate() {
     this.doorHeight = document.getElementById("doorHeight").value
     this.windowWidth = document.getElementById("windowWidth").value
     this.windowHeight = document.getElementById("windowHeight").value
-    this.doorsNumber = document.getElementById("doorsNumber").value
+    this.doorNumber = document.getElementById("doorNumber").value
     this.windowNumber = document.getElementById("windowNumber").value
 
-    this.totalWallArea = (((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - ((this.doorWidth * this.doorHeight * this.doorsNumber) + (this.windowWidth * this.windowHeight * this.windowNumber))
+
+    totalDoor()
+    this.totalWallArea = (((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - ((this.doorWidth * this.doorHeight * this.doorNumber) + (this.windowWidth * this.windowHeight * this.windowNumber))
     this.totalCeilingArea = (this.fieldWidth * this.fieldHeight * this.floorsNumber)
-
-    var select = document.getElementById('brickType');
-    var value = select.options[select.selectedIndex].value;
-
-    switch (value) {
-        case "1":
-            this.totalBrick = this.totalWallArea * 16
-        case "2":
-            this.totalBrick = this.totalWallArea * 22
-        case "3":
-            this.totalBrick = this.totalWallArea * 28
-        case "4":
-            this.totalBrick = this.totalWallArea * 27
-        default:
-            break;
-    }
     
     print()
 };
+
 function print() {
     document.getElementById("wallArea").innerHTML = this.totalWallArea + " m²"
     document.getElementById("ceilingArea").innerHTML = this.totalCeilingArea + " m²"
-    document.getElementById("totalBrick").innerHTML = this.totalBrick + " adet";
+
+    document.getElementById("insulation").innerHTML = this.totalWallArea * 16 + ' adet'
+    document.getElementById("pilup").innerHTML = this.totalWallArea * 22 + ' adet'
+    document.getElementById("twentyfive").innerHTML = this.totalWallArea * 28 + ' adet'
+    document.getElementById("thirteenhalf").innerHTML = this.totalWallArea * 27 + ' adet'
 };
 
 function sendWhatsapp() {
@@ -66,12 +56,67 @@ function sendWhatsapp() {
     text += "Kapı Boyu: " + this.doorHeight + " m\n";
     text += "Pencere Eni: " + this.windowWidth + " m\n";
     text += "Pencere Boyu: " + this.windowHeight + " m\n";
-    text += "Kapı Sayısı: " + this.doorsNumber + "\n";
+    text += "Kapı Sayısı: " + this.doorNumber + "\n";
     text += "Pencere Sayısı: " + this.windowNumber + "\n";
     text += "Duvar Alanı: " + this.totalWallArea + " m²\n";
     text += "Tavan Alanı: " + this.totalCeilingArea + " m²\n";
-    text += "Tuğla Adedi: " + this.totalBrick + " adet\n";
     
     var whatsappLink = "https://wa.me/905061324455?text=" + encodeURI(text);
-    window.open(whatsappLink);
+    window.location.href = whatsappLink;
+};
+
+function add(which) {
+    let name, howMany
+
+    switch (which) {
+        case 'door':
+            name = 'Kapı'
+            break;
+        case 'window':
+            name = 'Pencere'
+            break;
+        default:
+            break;
+    }
+
+    howMany = document.getElementById(which + 's').children.length
+
+    document.getElementById(which + '-0').insertAdjacentHTML("afterend", `
+    <div id="${which}-${howMany}" class="grid grid-cols-4 gap-2 pt-4 mb-5">
+        <div>
+            <label class="text-xs text-gray-400">${name} Eni (m)</label>
+            <input type="number" step="0.01" id="${which}Width-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
+        </div>
+        <div>
+            <label class="text-xs text-gray-400">${name} Boyu (m)</label>
+            <input type="number" step="0.01" id="${which}Height-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
+        </div>
+        <div>
+            <label class="text-xs text-gray-400">${name} Sayısı</label>
+            <input type="number" step="0.01" id="${which}Number-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
+        </div>
+        <button type="button" onclick="remove('${which}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
+    </div>
+    `)
+};
+
+function totalDoor() {
+    let doors = document.getElementById("doors").children
+    // for( let [i, d] of doors ) {
+    //     console.log(d)
+    //     console.log(i)
+    // }
+
+    for (let i = 0; i < doors.length; i++) {
+        console.log(doors[i]);
+    }
+    console.log(doors)
 }
+
+function totalWindow() {
+
+}
+
+function remove(which, id) {
+    document.getElementById(which + '-' + id).remove()
+};
