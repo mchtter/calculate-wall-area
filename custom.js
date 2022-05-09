@@ -1,13 +1,13 @@
-var fieldWidth, 
+let fieldWidth, 
     fieldHeight, 
     ceilingHeight, 
     floorsNumber, 
     doorWidth, 
     doorHeight, 
+    doorNumber,
     windowWidth, 
     windowHeight, 
-    doorNumber, 
-    windowNumber, 
+    windowNumber,
     totalWallArea, 
     totalCeilingArea;
 
@@ -16,21 +16,19 @@ document.querySelector('form').addEventListener('submit', function(e) {
     calculate();
 });
 
-function calculate() {
+calculate = async () => {
     this.fieldWidth = document.getElementById("fieldWidth").value
     this.fieldHeight = document.getElementById("fieldHeight").value
     this.ceilingHeight = document.getElementById("ceilingHeight").value
     this.floorsNumber = document.getElementById("floorsNumber").value
-    this.doorWidth = document.getElementById("doorWidth").value
-    this.doorHeight = document.getElementById("doorHeight").value
-    this.windowWidth = document.getElementById("windowWidth").value
-    this.windowHeight = document.getElementById("windowHeight").value
-    this.doorNumber = document.getElementById("doorNumber").value
-    this.windowNumber = document.getElementById("windowNumber").value
 
 
-    totalDoor()
-    this.totalWallArea = (((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - ((this.doorWidth * this.doorHeight * this.doorNumber) + (this.windowWidth * this.windowHeight * this.windowNumber))
+    let _totalDoorArea = await totalDoor()
+    let _totalWindowArea = await totalWindow()
+
+    console.log(_totalDoorArea, "_totalDoorArea")
+    console.log(_totalWindowArea, "_totalWindowArea")
+    this.totalWallArea = (((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - (_totalDoorArea + _totalWindowArea)
     this.totalCeilingArea = (this.fieldWidth * this.fieldHeight * this.floorsNumber)
     
     print()
@@ -39,7 +37,6 @@ function calculate() {
 function print() {
     document.getElementById("wallArea").innerHTML = this.totalWallArea + " m²"
     document.getElementById("ceilingArea").innerHTML = this.totalCeilingArea + " m²"
-
     document.getElementById("insulation").innerHTML = this.totalWallArea * 16 + ' adet'
     document.getElementById("pilup").innerHTML = this.totalWallArea * 22 + ' adet'
     document.getElementById("twentyfive").innerHTML = this.totalWallArea * 28 + ' adet'
@@ -95,28 +92,38 @@ function add(which) {
             <label class="text-xs text-gray-400">${name} Sayısı</label>
             <input type="number" step="0.01" id="${which}Number-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
         </div>
-        <button type="button" onclick="remove('${which}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
+        <button type="button" onclick="remove('${which}-${howMany}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
     </div>
     `)
 };
 
-function totalDoor() {
+totalDoor = () => {
     let doors = document.getElementById("doors").children
-    // for( let [i, d] of doors ) {
-    //     console.log(d)
-    //     console.log(i)
-    // }
+    let _totalDoorArea = 0
 
     for (let i = 0; i < doors.length; i++) {
-        console.log(doors[i]);
+        this.doorWidth = document.getElementById("doorWidth-" + i).value
+        this.doorHeight = document.getElementById("doorHeight-" + i).value
+        this.doorNumber = document.getElementById("doorNumber-" + i).value
+
+        _totalDoorArea += (this.doorWidth * this.doorHeight * this.doorNumber)
     }
-    console.log(doors)
+    return _totalDoorArea
 }
 
-function totalWindow() {
+totalWindow = () => {
+    let windows = document.getElementById("windows").children
+    let _totalWindowArea = 0
 
+    for (let i = 0; i < windows.length; i++) {
+        this.windowWidth = document.getElementById("windowWidth-" + i).value
+        this.windowHeight = document.getElementById("windowHeight-" + i).value
+        this.windowNumber = document.getElementById("windowNumber-" + i).value
+        _totalWindowArea += (this.windowWidth * this.windowHeight * this.windowNumber)
+    }
+    return _totalWindowArea
 }
 
-function remove(which, id) {
-    document.getElementById(which + '-' + id).remove()
+function remove(which) {
+    document.getElementById(which).remove()
 };
