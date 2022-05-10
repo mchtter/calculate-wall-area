@@ -28,7 +28,7 @@ calculate = async () => {
 
     console.log(_totalDoorArea, "_totalDoorArea")
     console.log(_totalWindowArea, "_totalWindowArea")
-    this.totalWallArea = ((((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - (_totalDoorArea + _totalWindowArea)) * this.floorsNumber
+    this.totalWallArea = (this.floorsNumber * ((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - (_totalDoorArea + _totalWindowArea)
     this.totalCeilingArea = (this.fieldWidth * this.fieldHeight * this.floorsNumber)
     
     print()
