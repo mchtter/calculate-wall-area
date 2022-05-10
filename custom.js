@@ -9,7 +9,8 @@ let fieldWidth,
     windowHeight, 
     windowNumber,
     totalWallArea, 
-    totalCeilingArea;
+    totalCeilingArea,
+    counter = 1;
 
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -63,7 +64,7 @@ function sendWhatsapp() {
 };
 
 function add(which) {
-    let name, howMany
+    let name
 
     switch (which) {
         case 'door':
@@ -76,25 +77,27 @@ function add(which) {
             break;
     }
 
-    howMany = document.getElementById(which + 's').children.length
+    // howMany = document.getElementById(which + 's').children.length
 
     document.getElementById(which + '-0').insertAdjacentHTML("afterend", `
-    <div id="${which}-${howMany}" class="grid grid-cols-4 gap-2 pt-4 mb-5">
+    <div id="${which}-${counter}" class="grid grid-cols-4 gap-2 pt-4 mb-5">
         <div>
             <label class="text-xs text-gray-400">${name} Eni (m)</label>
-            <input type="number" step="0.01" id="${which}Width-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
+            <input type="number" step="0.01" id="${which}Width-${counter}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
         </div>
         <div>
             <label class="text-xs text-gray-400">${name} Boyu (m)</label>
-            <input type="number" step="0.01" id="${which}Height-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
+            <input type="number" step="0.01" id="${which}Height-${counter}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
         </div>
         <div>
             <label class="text-xs text-gray-400">${name} Sayısı</label>
-            <input type="number" step="0.01" id="${which}Number-${howMany}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
+            <input type="number" step="0.01" id="${which}Number-${counter}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
         </div>
-        <button type="button" onclick="remove('${which}-${howMany}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
+        <button type="button" onclick="remove('${which}-${counter}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
     </div>
     `)
+    
+    counter++
 };
 
 totalDoor = () => {
