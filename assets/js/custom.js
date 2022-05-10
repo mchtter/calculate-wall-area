@@ -75,7 +75,7 @@ function send(which) {
             window.open(whatsappLink);
             break;
         case 'email':
-            var emailLink = "mailto:info@artovy.com" + "?subject=Duvar%20Alanı%20Hesap%20Sistemi%20Sonuçları&body=" + encodeURI(text);
+            var emailLink = "mailto:info@asyatoprak.com" + "?subject=Duvar%20Alanı%20Hesap%20Sistemi%20Sonuçları&body=" + encodeURI(text);
             window.open(emailLink);
             break;
         default:
