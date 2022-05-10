@@ -36,12 +36,12 @@ calculate = async () => {
 }
 
 function print() {
-    document.getElementById("wallArea").innerHTML = this.totalWallArea + " m²"
-    document.getElementById("ceilingArea").innerHTML = this.totalCeilingArea + " m²"
-    document.getElementById("insulation").innerHTML = this.totalWallArea * 16 + ' adet'
-    document.getElementById("pilup").innerHTML = this.totalWallArea * 22 + ' adet'
-    document.getElementById("twentyfive").innerHTML = this.totalWallArea * 28 + ' adet'
-    document.getElementById("thirteenhalf").innerHTML = this.totalWallArea * 27 + ' adet'
+    document.getElementById("wallArea").innerHTML = (this.totalWallArea).toFixed(2) + " m²"
+    document.getElementById("ceilingArea").innerHTML = (this.totalCeilingArea).toFixed(2) + " m²"
+    document.getElementById("insulation").innerHTML = (this.totalWallArea * 16).toFixed(2) + ' adet'
+    document.getElementById("pilup").innerHTML = (this.totalWallArea * 22).toFixed(2) + ' adet'
+    document.getElementById("twentyfive").innerHTML = (this.totalWallArea * 28).toFixed(2) + ' adet'
+    document.getElementById("thirteenhalf").innerHTML = (this.totalWallArea * 27).toFixed(2) + ' adet'
 
     const whatsappButton = document.getElementById('whatsappButton')
     whatsappButton.disabled = false
