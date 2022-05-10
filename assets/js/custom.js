@@ -19,7 +19,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
     calculate();
 })
 
-calculate = async () => {
+async function calculate() {
     this.fieldWidth = document.getElementById("fieldWidth").value
     this.fieldHeight = document.getElementById("fieldHeight").value
     this.ceilingHeight = document.getElementById("ceilingHeight").value
@@ -133,7 +133,7 @@ function add(which) {
     `)
 }
 
-doorValues = () => {
+function doorValues() {
     let doors = document.getElementById("doors").children
     let _doorWidth, _doorHeight, _doorNumber, text = ""
 
@@ -150,7 +150,7 @@ doorValues = () => {
     return text
 }
 
-windowValues = () => {
+function windowValues() {
     let windows = document.getElementById("windows").children
     let _windowWidth, _windowHeight, _windowNumber, text = ""
 
@@ -167,7 +167,7 @@ windowValues = () => {
     return text
 }
 
-totalDoor = () => {
+function totalDoor() {
     let doors = document.getElementById("doors").children
     let _totalDoorArea = 0
 
@@ -182,7 +182,7 @@ totalDoor = () => {
     return _totalDoorArea
 }
 
-totalWindow = () => {
+function totalWindow() {
     let windows = document.getElementById("windows").children
     let _totalWindowArea = 0
 
