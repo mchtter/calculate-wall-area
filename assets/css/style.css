@@ -3,3 +3,6 @@
     color: red;
     font-size: smaller;
 }
+button[type="button"]:disabled {
+    background: #aaaaaa;
+  }

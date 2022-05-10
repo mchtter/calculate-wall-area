@@ -17,7 +17,7 @@ let fieldWidth,
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
     calculate();
-});
+})
 
 calculate = async () => {
     this.fieldWidth = document.getElementById("fieldWidth").value
@@ -29,13 +29,11 @@ calculate = async () => {
     let _totalDoorArea = await totalDoor()
     let _totalWindowArea = await totalWindow()
 
-    console.log(_totalDoorArea, "_totalDoorArea")
-    console.log(_totalWindowArea, "_totalWindowArea")
     this.totalWallArea = (this.floorsNumber * ((2 * this.fieldWidth) + (2 * this.fieldHeight)) * this.ceilingHeight) - (_totalDoorArea + _totalWindowArea)
     this.totalCeilingArea = (this.fieldWidth * this.fieldHeight * this.floorsNumber)
     
     print()
-};
+}
 
 function print() {
     document.getElementById("wallArea").innerHTML = this.totalWallArea + " m²"
@@ -44,26 +42,59 @@ function print() {
     document.getElementById("pilup").innerHTML = this.totalWallArea * 22 + ' adet'
     document.getElementById("twentyfive").innerHTML = this.totalWallArea * 28 + ' adet'
     document.getElementById("thirteenhalf").innerHTML = this.totalWallArea * 27 + ' adet'
-};
 
-function sendWhatsapp() {
+    const whatsappButton = document.getElementById('whatsappButton')
+    whatsappButton.disabled = false
+    const emailButton = document.getElementById('emailButton')
+    emailButton.disabled = false
+    const imageButton = document.getElementById('imageButton')
+    imageButton.disabled = false
+}
+
+function send(which) {
     var text = "";
     text += "Alanın Eni: " + this.fieldWidth + " m\n";
     text += "Alanın Boyu: " + this.fieldHeight + " m\n";
     text += "Tavan Yükseliği: " + this.ceilingHeight + " m\n";
-    text += "Kat Sayısı: " + this.floorsNumber + "\n";
-    text += "Kapı Eni: " + this.doorWidth + " m\n";
-    text += "Kapı Boyu: " + this.doorHeight + " m\n";
-    text += "Pencere Eni: " + this.windowWidth + " m\n";
-    text += "Pencere Boyu: " + this.windowHeight + " m\n";
-    text += "Kapı Sayısı: " + this.doorNumber + "\n";
-    text += "Pencere Sayısı: " + this.windowNumber + "\n";
+    text += "Kat Sayısı: " + this.floorsNumber + "\n\n\n";
+
+    text += "Kapılar\n";
+    text += doorValues()
+    text += "\n";
+
+    text += "Pencereler\n";
+    text += windowValues()
+    text += "\n";
+
     text += "Duvar Alanı: " + this.totalWallArea + " m²\n";
     text += "Tavan Alanı: " + this.totalCeilingArea + " m²\n";
     
-    var whatsappLink = "https://wa.me/905061324455?text=" + encodeURI(text);
-    window.location.href = whatsappLink;
-};
+    switch (which) {
+        case 'whatsapp':
+            var whatsappLink = "https://wa.me/905061324455?text=" + encodeURI(text);
+            window.open(whatsappLink);
+            break;
+        case 'email':
+            var emailLink = "mailto:info@artovy.com" + "?subject=Duvar%20Alanı%20Hesap%20Sistemi%20Sonuçları&body=" + encodeURI(text);
+            window.open(emailLink);
+            break;
+        default:
+            break;
+
+    }
+}
+
+function openImage() {
+    let div = document.getElementById('photo');
+    html2canvas(div).then(
+        function (canvas) {
+            var myImage = canvas.toDataURL("image/png");
+            var image = new Image();
+            image.src = myImage;
+            var w = window.open(window.location.href);
+            w.document.write(image.outerHTML);
+        })
+}
 
 function add(which) {
     let name
@@ -83,8 +114,6 @@ function add(which) {
             break;
     }
 
-    // howMany = document.getElementById(which + 's').children.length
-
     document.getElementById(which + '-0').insertAdjacentHTML("afterend", `
     <div id="${which}-${counter}" class="grid grid-cols-4 gap-2 pt-4 mb-5">
         <div>
@@ -102,9 +131,41 @@ function add(which) {
         <button type="button" onclick="remove('${which}-${counter}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
     </div>
     `)
-    
-    counter++
-};
+}
+
+doorValues = () => {
+    let doors = document.getElementById("doors").children
+    let _doorWidth, _doorHeight, _doorNumber, text = ""
+
+    for (let i = 0; i < doors.length; i++) {
+        _doorWidth = document.getElementById("doorWidth-" + i).value
+        _doorHeight = document.getElementById("doorHeight-" + i).value
+        _doorNumber = document.getElementById("doorNumber-" + i).value
+
+        text += `Kapı ${i + 1} Eni: ` + _doorWidth + " m\n";
+        text += `Kapı ${i + 1} Boyu: ` + _doorHeight + " m\n";
+        text += `Kapı ${i + 1} Sayısı: ` + _doorNumber + "\n\n";
+    }
+
+    return text
+}
+
+windowValues = () => {
+    let windows = document.getElementById("windows").children
+    let _windowWidth, _windowHeight, _windowNumber, text = ""
+
+    for (let i = 0; i < windows.length; i++) {
+        _windowWidth = document.getElementById("windowWidth-" + i).value
+        _windowHeight = document.getElementById("windowHeight-" + i).value
+        _windowNumber = document.getElementById("windowNumber-" + i).value
+
+        text += `Pencere ${i + 1} Eni: ` + _windowWidth + " m\n";
+        text += `Pencere ${i + 1} Boyu: ` + _windowHeight + " m\n";
+        text += `Pencere ${i + 1} Sayısı: ` + _windowNumber + "\n\n";
+    }
+
+    return text
+}
 
 totalDoor = () => {
     let doors = document.getElementById("doors").children
@@ -117,6 +178,7 @@ totalDoor = () => {
 
         _totalDoorArea += (this.doorWidth * this.doorHeight * this.doorNumber)
     }
+
     return _totalDoorArea
 }
 
@@ -130,9 +192,10 @@ totalWindow = () => {
         this.windowNumber = document.getElementById("windowNumber-" + i).value
         _totalWindowArea += (this.windowWidth * this.windowHeight * this.windowNumber)
     }
+
     return _totalWindowArea
 }
 
 function remove(which) {
     document.getElementById(which).remove()
-};
+}
