@@ -10,7 +10,9 @@ let fieldWidth,
     windowNumber,
     totalWallArea, 
     totalCeilingArea,
-    counter = 1;
+    counter,
+    counterDoor = 0,
+    counterWindow = 0;
 
 document.querySelector('form').addEventListener('submit', function(e) {
     e.preventDefault();
@@ -69,9 +71,13 @@ function add(which) {
     switch (which) {
         case 'door':
             name = 'Kapı'
+            counterDoor++
+            counter = counterDoor
             break;
         case 'window':
             name = 'Pencere'
+            counterWindow++
+            counter = counterWindow
             break;
         default:
             break;
