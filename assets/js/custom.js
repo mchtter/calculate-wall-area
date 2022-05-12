@@ -133,7 +133,7 @@ function add(which) {
             <label class="text-xs text-gray-400">${name} Sayısı</label>
             <input type="number" step="0.01" id="${which}Number-${counter}" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
         </div>
-        <button type="button" onclick="remove('${which}-${counter}')" class="h-12 w-12 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
+        <button type="button" onclick="remove('${which}-${counter}')" class="text-md h-7 w-7 my-5 bg-red-500 rounded-full focus:outline text-white hover:bg-red-600 justify-self-center"> - </button>
     </div>
     `)
 }
