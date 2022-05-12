@@ -5,4 +5,89 @@
 }
 button[type="button"]:disabled {
     background: #aaaaaa;
-  }
+}
+@media screen and (max-width: 400px) {
+    .text-xs {
+        font-size: 5px;
+    }
+    .text-sm {
+        font-size: 6px;
+    }
+    .text-md {
+        font-size: 7px;
+    }
+    .text-lg {
+        font-size: 8px;
+    }
+    .text-xl {
+        font-size: 9px;
+    }
+}
+@media screen and (min-width: 401px) and (max-width: 600px) {
+    .text-xs {
+        font-size: 6px;
+    }
+    .text-sm {
+        font-size: 7px;
+    }
+    .text-md {
+        font-size: 8px;
+    }
+    .text-lg {
+        font-size: 9px;
+    }
+    .text-xl {
+        font-size: 10px;
+    }
+}
+@media screen and (min-width: 601px) and ( max-width: 900px) {
+    .text-xs {
+        font-size: 7px;
+    }
+    .text-sm {
+        font-size: 8px;
+    }
+    .text-md {
+        font-size: 9.5px;
+    }
+    .text-lg {
+        font-size: 11px;
+    }
+    .text-xl {
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 901px) and ( max-width: 1200px) {
+    .text-xs {
+        font-size: 9px;
+    }
+    .text-sm {
+        font-size: 10px;
+    }
+    .text-md {
+        font-size: 11px;
+    }
+    .text-lg {
+        font-size: 12px;
+    }
+    .text-xl {
+        font-size: 13px;
+    }
+}
+@media screen and (min-width: 1200px) {
+    .text-xs {
+        font-size: 10px;
+    }
+    .text-sm {
+        font-size: 11px;
+    }
+    .text-md {
+        font-size: 12px;
+    }
+    .text-lg {
+        font-size: 13px;
+    }
+    .text-xl {
+        font-size: 14px;
+    }
+}

@@ -36,12 +36,12 @@ async function calculate() {
 }
 
 function print() {
-    document.getElementById("wallArea").innerHTML = (this.totalWallArea).toFixed(2) + " m²"
-    document.getElementById("ceilingArea").innerHTML = (this.totalCeilingArea).toFixed(2) + " m²"
-    document.getElementById("insulation").innerHTML = (this.totalWallArea * 16).toFixed(2) + ' adet'
-    document.getElementById("pilup").innerHTML = (this.totalWallArea * 22).toFixed(2) + ' adet'
-    document.getElementById("twentyfive").innerHTML = (this.totalWallArea * 28).toFixed(2) + ' adet'
-    document.getElementById("thirteenhalf").innerHTML = (this.totalWallArea * 27).toFixed(2) + ' adet'
+    document.getElementById("wallArea").innerHTML = Math.round(this.totalWallArea) + " m²"
+    document.getElementById("ceilingArea").innerHTML = Math.round(this.totalCeilingArea) + " m²"
+    document.getElementById("insulation").innerHTML = Math.round(this.totalWallArea * 16) + ' adet'
+    document.getElementById("pilup").innerHTML = Math.round(this.totalWallArea * 22) + ' adet'
+    document.getElementById("twentyfive").innerHTML = Math.round(this.totalWallArea * 28) + ' adet'
+    document.getElementById("thirteenhalf").innerHTML = Math.round(this.totalWallArea * 27) + ' adet'
 
     const whatsappButton = document.getElementById('whatsappButton')
     whatsappButton.disabled = false
@@ -85,14 +85,20 @@ function send(which) {
 }
 
 function openImage() {
-    let div = document.getElementById('photo');
+    let div = document.getElementById('photo')
     html2canvas(div).then(
         function (canvas) {
-            var myImage = canvas.toDataURL("image/png");
-            var image = new Image();
-            image.src = myImage;
-            var w = window.open(window.location.href);
-            w.document.write(image.outerHTML);
+            var myImage = canvas.toDataURL("image/png")
+            var image = new Image()
+            image.src = myImage
+            image.href = myImage
+            image.download = 'image.png'
+            console.log(image)
+            document.body.appendChild(image)
+            image.click()
+            document.body.removeChild(image)
+            // var w = window.open(window.location.href)
+            // w.document.write(image.outerHTML)
         })
 }
 

@@ -10,7 +10,7 @@
     <title>Duvar Alanı Hesaplayıcı</title>
 </head>
 <body class="h-100 bg-gray-300">
-    <div id="photo" class="py-12">
+    <div class="py-12">
         <div class="max-w-md mx-auto bg-gray-100 shadow-lg rounded-lg md:max-w-7xl">
             <div class="md:flex ">
                 <div class="w-full p-4 px-5 py-5">
@@ -19,15 +19,15 @@
                             <form>
                                 <div class="grid grid-cols-4 gap-2 pt-4 mb-5">
                                     <div>
-                                        <label class="text-xs text-gray-400 required">Alanın Eni (m)</label>
+                                        <label class="text-xs text-gray-400 required">Alanın Eni</label>
                                         <input type="number" step="0.01" id="fieldWidth" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4" required>
                                     </div>
                                     <div>
-                                        <label class="text-xs text-gray-400 required">Alanın Boyu (m)</label>
+                                        <label class="text-xs text-gray-400 required">Alanın Boyu</label>
                                         <input type="number" step="0.01" id="fieldHeight" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4" required>
                                     </div>
                                     <div>
-                                        <label class="text-xs text-gray-400 required">Tavan Yüksekliği (m)</label>
+                                        <label class="text-xs text-gray-400 required">Tavan Yüksekliği</label>
                                         <input type="number" step="0.01" id="ceilingHeight" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4" required>
                                     </div>
                                     <div>
@@ -38,11 +38,11 @@
                                 <div id="doors">
                                     <div id="door-0" class="grid grid-cols-4 gap-2 pt-4 mb-5">
                                         <div>
-                                            <label class="text-xs text-gray-400">Kapı Eni (m)</label>
+                                            <label class="text-xs text-gray-400">Kapı Eni</label>
                                             <input type="number" step="0.01" id="doorWidth-0" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
                                         </div>
                                         <div>
-                                            <label class="text-xs text-gray-400">Kapı Boyu (m)</label>
+                                            <label class="text-xs text-gray-400">Kapı Boyu</label>
                                             <input type="number" step="0.01" id="doorHeight-0" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
                                         </div>
                                         <div>
@@ -55,11 +55,11 @@
                                 <div id="windows">
                                     <div id="window-0" class="grid grid-cols-4 gap-2 pt-4 mb-5">
                                         <div>
-                                            <label class="text-xs text-gray-400">Pencere Eni (m)</label>
+                                            <label class="text-xs text-gray-400">Pencere Eni</label>
                                             <input type="number" step="0.01" id="windowWidth-0" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
                                         </div>
                                         <div>
-                                            <label class="text-xs text-gray-400">Pencere Boyu (m)</label>
+                                            <label class="text-xs text-gray-400">Pencere Boyu</label>
                                             <input type="number" step="0.01" id="windowHeight-0" class="focus:outline-none w-full h-6 bg-gray-800 text-white placeholder-gray-300 text-sm border-b border-gray-600 py-4">
                                         </div>
                                         <div>
@@ -73,6 +73,9 @@
                             </form>
                             <ul>
                                 <li>
+                                    <label class="text-xs text-gray-400">* Lütfen değerleri "METRE" cinsinden giriniz.</label> 
+                                </li>
+                                <li>
                                     <label class="text-xs text-gray-400">* Yalnızca sayı giriniz.</label> 
                                 </li>
                                 <li>
@@ -80,13 +83,13 @@
                                 </li>
                             </ul>
                         </div>
-                        <div class="col-span-1 p-5">
+                        <div id="photo" class="col-span-1 p-5">
                             <h1 class="text-xl font-medium">Detaylar</h1>
                             <div class="flex justify-between items-center mt-4 pt-4">
                                 <div class="flex items-center"> 
                                     <div class="rounded-full w-5 h-20 bg-gray-600"></div>
                                     <div class="flex flex-col ml-3"> 
-                                        <span class="md:text-md font-medium">İzoyün Yalıtım Tuğlası</span> 
+                                        <span class="text-md font-medium w-auto">İzoyün Yalıtım Tuğlası</span> 
                                         <span class="text-xs font-light text-gray-400">#Adet</span> 
                                     </div>
                                 </div>
@@ -128,7 +131,7 @@
                                 <div class="flex items-center"> 
                                     <div class="rounded-full w-5 h-20 bg-blue-600"></div>
                                     <div class="flex flex-col ml-3 "> 
-                                        <span class="text-md font-medium">13.5'luk Duvar Tuğlası</span> 
+                                        <span class="text-md font-medium w-auto">13.5'luk Duvar Tuğlası</span> 
                                         <span class="text-xs font-light text-gray-400">#Adet</span> 
                                     </div>
                                 </div>
@@ -138,7 +141,7 @@
                                     </div>
                                 </div>
                             </div>
-                            <b>Detaylı bilgi ve fiyat teklifi için;</b>
+                            <h1 class="text-xl font-medium">Detaylı bilgi ve fiyat teklifi için;</h1>
                             <div class="flex justify-between items-center">
                                 <div>
                                     <button type="button" id="whatsappButton" disabled onclick="send('whatsapp')" title="Whatsapp ile gönder" class="h-10 w-10 bg-green-700 rounded focus:outline-none text-white hover:bg-green-600">
