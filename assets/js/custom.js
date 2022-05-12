@@ -20,10 +20,10 @@ document.querySelector('form').addEventListener('submit', function(e) {
 })
 
 async function calculate() {
-    this.fieldWidth = document.getElementById("fieldWidth").value
-    this.fieldHeight = document.getElementById("fieldHeight").value
-    this.ceilingHeight = document.getElementById("ceilingHeight").value
-    this.floorsNumber = document.getElementById("floorsNumber").value
+    fieldWidth = document.getElementById("fieldWidth").value
+    fieldHeight = document.getElementById("fieldHeight").value
+    ceilingHeight = document.getElementById("ceilingHeight").value
+    floorsNumber = document.getElementById("floorsNumber").value
 
 
     let _totalDoorArea = await totalDoor()
