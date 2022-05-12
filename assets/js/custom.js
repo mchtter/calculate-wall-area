@@ -91,14 +91,13 @@ function openImage() {
             var myImage = canvas.toDataURL("image/png")
             var image = new Image()
             image.src = myImage
-            image.href = myImage
-            image.download = 'image.png'
-            console.log(image)
-            document.body.appendChild(image)
-            image.click()
-            document.body.removeChild(image)
-            // var w = window.open(window.location.href)
-            // w.document.write(image.outerHTML)
+            // create a new image element and download the image
+            var img = document.createElement("a");
+            img.href = myImage
+            img.download = "image.png"
+            document.body.appendChild(img)
+            img.click()
+            document.body.removeChild(img)
         })
 }
 
