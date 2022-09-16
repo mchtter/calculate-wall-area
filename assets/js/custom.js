@@ -14,10 +14,10 @@ let fieldWidth,
     counterDoor = 0,
     counterWindow = 0;
 
-document.querySelector('form').addEventListener('submit', function(e) {
-    e.preventDefault();
-    calculate();
-})
+// document.querySelector('form').addEventListener('submit', function(e) {
+//     e.preventDefault();
+//     calculate();
+// })
 
 async function calculate() {
     this.fieldWidth = document.getElementById("fieldWidth").value
